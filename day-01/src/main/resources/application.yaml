@@ -1,0 +1,35 @@
+#springboot官方推荐yaml配置文件，只是语法不同---k: v
+server:
+  port: 80
+
+spring:
+  application:
+    name: day01
+  mvc:
+    view:
+      suffix: .html
+  #关闭模板引擎的缓存
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML
+  #导入了mybatis就要写好数据库的连接信息
+  datasource:
+    #3306/后面的第一个元素指明了你要连接哪一个数据库，一定要写正确，不然直接空指针！
+    url: jdbc:mysql://rm-bp1oul31omymk52umvo.mysql.rds.aliyuncs.com:3306/graduate_project?useUnicode=true&useSSL=false&serverTimezone=UTC
+    username: faker
+    password: 2000814Xuke!
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  #config-location: classpath:mybatis/mybatis-config.xml 不能再写这个，因为下面干了这个活，否则就会重复
+  mapper-locations: classpath:mybatis/mapper/*Mapper.xml
+  type-aliases-package: com.faker.day01.pojo #别名，在java文件夹后
+  configuration:
+    map-underscore-to-camel-case: true #一定要加这个！不然数据库查出来的值会一堆null
+
+logging:
+  level:
+    com.faker.day01.DAO: debug
+

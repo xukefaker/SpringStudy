@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.faker.day01.DAO.ArticleMapper">
+    <select id="getArticleByID" resultType="Article">
+        select * from graduate_project.article where id = #{id};
+    </select>
+    <select id="getArticles" resultType="Article">
+        select * from graduate_project.article;
+    </select>
+    <insert id="addArticle" parameterType="Article"  useGeneratedKeys="true" keyProperty="id">
+        insert into graduate_project.article(source_id, pub_date, title, description, link, platform) VALUES (#{sourceID},#{pubDate},#{title},#{description},#{link},#{platform});
+    </insert>
+    <select id="getArticlesBySourceID" resultType="Article">
+        select * from graduate_project.article where source_id = #{id};
+    </select>
+    <delete id="removeArticleBySourceID">
+        delete from graduate_project.article where source_id = #{id};
+    </delete>
+    <select id="getIdBySourceID" resultType="Integer">
+        select id from graduate_project.article where source_id = #{id};
+    </select>
+
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.faker.day01.DAO.SubscribeRecordMapper">
+    <insert id="addSubscribeRecord" parameterType="SubscribeRecord"  useGeneratedKeys="true" keyProperty="id">
+        insert into graduate_project.subscribe_record(user_id, source_id, subscribe_time) values (#{userID}, #{sourceID}, #{subscribeTime});
+    </insert>
+    <select id="getSubscribeRecordByID" resultType="SubscribeRecord">
+        select * from graduate_project.subscribe_record where id = #{id};
+    </select>
+    <select id="getSubscribeRecordByUserID" resultType="SubscribeRecord">
+        select * from graduate_project.subscribe_record where user_id = #{id};
+    </select>
+    <select id="getSubscribeRecordBySourceID" resultType="SubscribeRecord">
+        select * from graduate_project.subscribe_record where source_id = #{id};
+    </select>
+    <select id="getSubscribeRecords" resultType="SubscribeRecord">
+        select * from graduate_project.subscribe_record;
+    </select>
+    <delete id="deleteSubscribeRecordByUserSourceID">
+        DELETE FROM graduate_project.subscribe_record
+               WHERE user_id = #{userID} and source_id = #{sourceID};
+    </delete>
+
+
+</mapper>

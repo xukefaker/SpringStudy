@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.faker.day01.DAO.ClassRecordMapper">
+    <select id="getClassRecordByID" resultType="ClassRecord">
+        select * from graduate_project.class_record where id = #{id};
+    </select>
+    <select id="getClassRecordsByUserID" resultType="ClassRecord">
+        select * from graduate_project.class_record where user_id = #{id};
+    </select>
+    <select id="getClassRecordBySourceID" resultType="ClassRecord">
+        select * from graduate_project.class_record where source_id = #{id};
+    </select>
+    <insert id="addClassRecord" parameterType="ClassRecord"  useGeneratedKeys="true" keyProperty="id">
+        insert into graduate_project.class_record(user_id, source_id, source_class) VALUES (#{userID}, #{sourceID}, #{sourceClass});
+    </insert>
+    <select id="getClassRecords" resultType="ClassRecord">
+        select * from graduate_project.class_record;
+    </select>
+    <select id="getClassRecordBySourceUserID" resultType="com.faker.day01.pojo.ClassRecord">
+        select id, user_id as userID,source_id as sourceID,source_class as sourceClass
+        from graduate_project.class_record
+        where user_id = #{userID} and source_id = #{sourceID};
+    </select>
+    <delete id="deleteClassByID">
+        DELETE FROM graduate_project.class_record WHERE id = #{id};
+    </delete>
+    <update id="updateClassRecordByUserSourceID">
+        update graduate_project.class_record
+        set source_class = #{className}
+        where user_id = #{userID} and source_id = #{sourceID};
+    </update>
+
+
+</mapper>

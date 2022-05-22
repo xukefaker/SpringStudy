@@ -1,0 +1,398 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>爱阅读</title>
+
+    <!--    展示框的两个css-->
+    <link th:href="@{/css/blogbase.css}" rel="stylesheet">
+    <link th:href="@{/css/blog.css}" rel="stylesheet">
+    <!--    个人信息修改界面的css-->
+    <link th:href="@{/css/information.css}" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet">
+    <link th:href="@{/css/buttons.css}" rel="stylesheet">
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+  </head>
+  <body>
+
+  <script th:src="@{/js/dashboard.js}"></script>
+
+
+
+<!--  下面是快速修改密码框-->
+  <div class="popOut" id="popOut-info">
+    <span title="关闭" id="closeInfoChangeBtn"> x </span>
+    <table>
+      <caption>欢迎登录本网站</caption>
+      <tr>
+        <td width="120">用户名：</td>
+        <td><input type="text" class="inp" placeholder="请输入用户名" id="quickChangeUsername"/></td>
+      </tr>
+      <tr>
+        <td>密码：</td>
+        <td><input type="password" class="inp" placeholder="请输入密码" id="quickChangePassword"/></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="button" class="login" value="确认修改" onclick="quickChangeInfo()"/></td>
+      </tr>
+    </table>
+  </div>
+
+<!--  上面是快速修改密码弹出框-->
+  <!--  下面是微信扫码弹出框-->
+  <div class="popOut" id="popOut-wechat">
+    <span title="关闭" id="closeWechatBtn"> x </span>
+    <table>
+      <caption>请使用qq扫码，并授权我们访问您的信息</caption>
+      <tr>
+        <td width="120"><img th:src="@{/img/logo.png}"></td>
+      </tr>
+
+    </table>
+  </div>
+
+  <!--  上面是微信扫码弹出框-->
+
+  <!--  下面是快速添加订阅源弹出框-->
+  <div class="popOut" id="popOut-source">
+    <span title="关闭" id="closeSourceBtn"> x </span>
+    <table>
+      <caption>请输入你需要添加的订阅源，格式请参考https://docs.rsshub.app</caption>
+      <tr>
+        <td width="120">URL：</td>
+        <td><input type="text" class="inp" placeholder="请输入URL" id="quickAddInput"/></td>
+      </tr>
+      <tr>
+        <td colspan="2"><input type="button" class="login" value="提交URL" onclick="quickAddSource()"/></td>
+      </tr>
+    </table>
+  </div>
+
+  <!--  上面是快速添加订阅源弹出框-->
+
+    
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">爱阅读欢迎：<span id="username-box">[[${username}]]</span></a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <a class="nav-link" href="index.html">Sign out</a>
+    </li>
+  </ul>
+</nav>
+
+<div class="container-fluid" >
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+      <div class="sidebar-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" onclick="displayArticles()">
+              <span data-feather="home"></span>
+              主页刷新
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="refreshArticles()">
+              <span data-feather="file"></span>
+              刷新后台文章
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="changeInfoBtn">
+              <span data-feather="file"></span>
+              快速修改用户名和密码
+            </a>
+          </li>
+<!--          快速修改用户名按钮绑定事件脚本-->
+          <script type="text/javascript">
+            function $(param) {
+              if (arguments[1] == true) {
+                return document.querySelectorAll(param);
+              } else {
+                return document.querySelector(param);
+              }
+            }
+            function aniInfo() {
+              document.getElementById("popOut-info").className = "popOut ani";
+            }
+            document.getElementById("changeInfoBtn").onclick = function() {
+              document.getElementById("article-container").style.display = "none";
+              document.getElementById("information-container").style.display = "none";
+              document.getElementById("source-container").style.display = "none";
+              document.getElementById("popOut-wechat").style.display = "none";
+              document.getElementById("popOut-source").style.display = "none";
+              document.getElementById("popOut-info").style.display = "block";
+              aniInfo();
+            };
+            document.getElementById("closeInfoChangeBtn").onclick = function() {
+              document.getElementById("popOut-info").style.display = "none";
+            };
+          </script>
+<!--          快速修改用户名按钮绑定事件脚本-->
+          <li class="nav-item">
+            <a class="nav-link" onclick="displayPersonalInformation()">
+              <span data-feather="users"></span>
+              查看个人信息
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" onclick="displaySources()">
+              <span data-feather="bar-chart-2"></span>
+              订阅源管理界面
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="addSourceBtn">
+              <span data-feather="layers"></span>
+              快速添加订阅源
+            </a>
+          </li>
+
+          <!--          快速添加订阅源脚本-->
+          <script type="text/javascript">
+            function $(param) {
+              if (arguments[1] == true) {
+                return document.querySelectorAll(param);
+              } else {
+                return document.querySelector(param);
+              }
+            }
+            function aniAddSource() {
+              document.getElementById("popOut-source").className = "popOut ani";
+            }
+            document.getElementById("addSourceBtn").onclick = function() {
+              document.getElementById("article-container").style.display = "none";
+              document.getElementById("information-container").style.display = "none";
+              document.getElementById("source-container").style.display = "none";
+              document.getElementById("popOut-source").style.display = "block";
+              document.getElementById("popOut-info").style.display = "none";
+              document.getElementById("popOut-wechat").style.display = "none";
+              aniAddSource();
+            };
+            document.getElementById("closeSourceBtn").onclick = function() {
+              document.getElementById("popOut-source").style.display = "none";
+            };
+          </script>
+          <!--          快速添加订阅源脚本-->
+
+
+          <li class="nav-item">
+            <a class="nav-link" id="QRBtn">
+              <span data-feather="users"></span>
+              申请绑定QQ
+            </a>
+          </li>
+          <!--          微信扫码图片脚本-->
+          <script type="text/javascript">
+            function $(param) {
+              if (arguments[1] == true) {
+                return document.querySelectorAll(param);
+              } else {
+                return document.querySelector(param);
+              }
+            }
+            function aniWechat() {
+              document.getElementById("popOut-wechat").className = "popOut ani";
+            }
+            document.getElementById("QRBtn").onclick = function() {
+              document.getElementById("article-container").style.display = "none";
+              document.getElementById("information-container").style.display = "none";
+              document.getElementById("source-container").style.display = "none";
+              document.getElementById("popOut-source").style.display = "none";
+              document.getElementById("popOut-info").style.display = "none";
+              document.getElementById("popOut-wechat").style.display = "block";
+              aniWechat();
+            };
+            document.getElementById("closeWechatBtn").onclick = function() {
+              document.getElementById("popOut-wechat").style.display = "none";
+            };
+          </script>
+          <!--          微信扫码图片脚本-->
+        </ul>
+
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+
+      <div class="ibody" id="article-container">
+        <article>
+          <div class="bloglist" id="article-list">
+            <h2>文章展示</h2>
+          </div>
+        </article>
+      </div>
+
+
+      <div class="aui-container" id="information-container">
+        <div class="aui-content-up">
+          <form action="" name="form1" method="post">
+
+
+            <div class="aui-content-up-form">
+              <h2>个人信息</h2>
+            </div>
+
+
+            <div class="aui-form-group clear">
+              <label class="aui-label-control">
+                用户名
+              </label>
+              <div class="aui-form-input">
+                <input type="text" class="aui-form-control-two" name="username" id="changeUsernameInput" th:placeholder="${username}" readonly/>
+                <span class="tips" id="usernameTip">长度5-10个字符</span>
+              </div>
+            </div>
+            <div class="aui-form-group clear">
+              <label class="aui-label-control">
+                密码
+              </label>
+              <div class="aui-form-input">
+                <input type="password" class="aui-form-control-two" name="password" id="changePasswordInput" readonly/>
+                <span class="tips" id="passwordTip">必须为大小写字母和数字的组合，长度为6-10个字符</span>
+              </div>
+            </div>
+            <div class="aui-form-group clear">
+              <label class="aui-label-control">
+                邮箱
+              </label>
+              <div class="aui-form-input">
+                <input type="text" class="aui-form-control-two" name="userEmail" id="changeEmailInput" th:placeholder="${email}" readonly/>
+                <span class="tips" id="emailTip">@前为大小写字母、数字和._%-，@后以字母加.结尾</span>
+              </div>
+            </div>
+            <div class="aui-form-group clear">
+              <label class="aui-label-control">
+                出生年月
+              </label>
+              <div class="aui-form-input">
+                <input type="text" class="aui-form-control-two" name="userBirthday" id="changeBirthInput" th:placeholder="${birth}" readonly/>
+                <span class="tips" id="birthdayTip">格式为 yyyy-mm-dd</span>
+              </div>
+            </div>
+            <div class="aui-form-group clear">
+              <label class="aui-label-control">
+                手机号
+              </label>
+              <div class="aui-form-input">
+                <input type="text" class="aui-form-control-two" name="userPhone" id="changePhoneInput" th:placeholder="${phone}" readonly/>
+                <span class="tips" id="phoneTip">长度必须为11位数字</span>
+              </div>
+            </div>
+
+
+          </form>
+        </div>
+        <div class="aui-btn-default">
+          <button class="aui-btn aui-btn-account" id="applyInfoEditBtn" onclick="applyInfoEdit()">申请编辑</button>
+          <button class="aui-btn aui-btn-account" id="submitChangeInfoBtn" onclick="submitInfoChangeData()">确认修改</button>
+        </div>
+      </div>
+
+
+
+      <div class="aui-container" id="source-container">
+        <div class="aui-content-up" id="source-manager">
+
+            <div class="aui-content-up-form">
+              <h2>订阅源管理</h2>
+            </div>
+
+<!--            <div class="aui-form-group clear">-->
+<!--              <label class="aui-label-control">-->
+<!--                娱乐-->
+<!--              </label>-->
+<!--              <div class="aui-form-input url-box">-->
+<!--                <span class="urls">长度必须为11位数字</span>-->
+<!--              </div>-->
+<!--              <a class="button button-glow button-rounded button-caution">删除</a>-->
+<!--              <span class="button-dropdown button-dropdown-plain" data-buttons="dropdown">-->
+<!--                <button class="button button-caution button-pill">-->
+<!--                  分类-->
+<!--                  <i class="fa fa-caret-down"></i>-->
+<!--                </button>-->
+<!--                <ul class="button-dropdown-list">-->
+<!--                  <li><a href="/">教育</a></li>-->
+<!--                  <li class="button-dropdown-divider">-->
+<!--                    <a href="/">娱乐</a>-->
+<!--                  </li>-->
+<!--                  <li>-->
+<!--                    <a href="#">博客</a>-->
+<!--                  </li>-->
+<!--                </ul>-->
+<!--              </span>-->
+<!--            </div>-->
+
+
+        </div>
+
+        <div class="aui-content-up" id="source-bin">
+
+          <div class="aui-content-up-form">
+            <h2>订阅源回收站</h2>
+          </div>
+<!--                      <div class="aui-form-group clear">-->
+<!--                        <label class="aui-label-control">-->
+<!--                          URL-->
+<!--                        </label>-->
+<!--                        <div class="aui-form-input url-box">-->
+<!--                          <span class="urls">删除日期</span>-->
+<!--                        </div>-->
+<!--                        <a class="button button-glow button-rounded button-caution">恢复订阅</a>-->
+<!--                        <a class="button button-glow button-rounded button-caution">彻底删除</a>-->
+<!--                      </div>-->
+
+
+        </div>
+
+      </div>
+
+
+<!--      <script th:src="@{/js/Chart.min.js}"></script>-->
+      <script th:src="@{/js/md5.js}"></script>
+      <script th:src="@{/js/jquery.slim.min.js}" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+      <script th:src="@{/js/jquery.js}"></script>
+      <script th:src="@{/js/feather.min.js}"></script>
+      <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+      <script th:src="@{/js/buttons.js}"></script>
+    </main>
+
+
+  </div>
+</div>
+
+
+
+  </body>
+</html>

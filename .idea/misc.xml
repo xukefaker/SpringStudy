@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptSettings">
+    <option name="languageLevel" value="FLOW" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/day-01/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SwUserDefinedSpecifications">
+    <option name="specTypeByUrl">
+      <map />
+    </option>
+  </component>
+  <component name="UnattendedHostPersistenceState">
+    <option name="openedFilesInfos">
+      <list>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="7400" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/day-01/src/main/resources/static/js/dashboard.js" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="540" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/day-01/src/main/java/com/faker/day01/DAO/ClassRecordMapper.java" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="548" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/day-01/src/main/java/com/faker/day01/DAO/SubscribeRecordMapper.java" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="955" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/day-01/src/main/java/com/faker/day01/pojo/SubscribeRecord.java" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="1103" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/day-01/src/main/resources/mybatis/mapper/UnsubscribeRecordMapper.xml" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="560" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/day-01/src/main/java/com/faker/day01/DAO/UnsubscribeRecordMapper.java" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="3038" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/day-01/src/main/java/com/faker/day01/controller/SourceManageController.java" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="546" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/day-01/src/main/java/com/faker/day01/controller/SourceClassController.java" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="846" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/day-01/src/main/java/com/faker/day01/controller/UnsubscribeController.java" />
+        </OpenedFileInfo>
+        <OpenedFileInfo>
+          <option name="caretOffset" value="2433" />
+          <option name="fileUrl" value="file://$PROJECT_DIR$/day-01/src/main/java/com/faker/day01/controller/SubscribeController.java" />
+        </OpenedFileInfo>
+      </list>
+    </option>
+  </component>
+</project>

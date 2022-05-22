@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.faker.day01.DAO.SourceMapper">
+    <select id="getSources" resultType="Source">
+        select * from graduate_project.source;
+    </select>
+    <select id="getSourceByID" resultType="Source">
+        select * from graduate_project.source where id = #{id};
+    </select>
+    <insert id="addSource" parameterType="Source" useGeneratedKeys="true" keyProperty="id">
+        insert into graduate_project.source(url, update_time) values (#{url}, #{updateTime});
+    </insert>
+    <delete id="removeSourceByID">
+        delete from graduate_project.source where id = #{id};
+    </delete>
+    <select id="getUrls" resultType="String">
+        select url from graduate_project.source;
+    </select>
+    <select id="getSourceByURL" parameterType="String" resultType="Source">
+        select id, url, update_time as updateTime
+        from graduate_project.source
+        where url like #{url};
+    </select>
+
+
+</mapper>

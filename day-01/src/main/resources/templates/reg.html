@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户注册</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="Keywords" content="网站关键词">
+    <meta name="Description" content="网站介绍">
+    <link rel="stylesheet" th:href="@{/css/base.css}">
+    <link rel="stylesheet" th:href="@{/css/iconfont.css}">
+    <link rel="stylesheet" th:href="@{/css/reg.css}">
+</head>
+<body>
+<script th:src="@{/js/jquery.js}"></script>
+<script th:src="@{/js/agree.js}"></script>
+<script th:src="@{/js/reg.js}"></script>
+<script th:src="@{/js/md5.js}"></script>
+    <div id="ajax-hook"></div>
+    <div class="wrap">
+        <div class="wpn">
+            <div class="form-data pos">
+                <a href=""><img th:src="@{/img/logo.png}" class="head-logo"></a>
+                <!--<p class="tel-warn hide"><i class="icon-warn"></i></p>-->
+                <span th:text="${regHint}"></span>
+                <form>
+                    <p class="p-input pos">
+                        <label for="usernameInput">用户名,5-10个任意字符</label>
+                        <input id="usernameInput" autocomplete="off">
+<!--                        <span class="tel-warn tel-err hide"><em></em><i class="icon-warn"></i></span>-->
+                    </p>
+                    <p class="p-input pos" id="sendcode">
+                        <label for="passwordInput">用户密码,6-10个大小写字母和数字</label>
+                        <input id="passwordInput" type="password" autocomplete="off">
+
+                    </p>
+
+                </form>
+                <div class="reg_checkboxline pos">
+                    <span class="z"><i class="icon-ok-sign boxcol" nullmsg="请同意!"></i></span>
+                    <input type="hidden" name="agree" value="1">
+                    <div class="Validform_checktip"></div>
+                    <p>我已阅读并接受 <a href="#" target="_brack">《XXXX协议说明》</a></p>
+                </div>
+                <button class="lang-btn" onclick="submitRegData()">注册</button>
+                <div class="bottom-info">已有账号?<a th:href="@{/}">马上登录</a></div>
+                <div class="third-party">
+<!--                    <a href="#" class="log-qq icon-qq-round"></a>-->
+                    <a href="#" class="log-qq icon-qq"></a>
+<!--                    <a href="#" class="log-qq icon-sina1"></a>-->
+                </div>
+                <p class="right">Xuke's Graduation Project</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
